@@ -2,20 +2,24 @@ import { Mongo } from "../database/mongo.js";
 import { ObjectId } from "mongodb";
 import crypto from "crypto";
 
-const collectionName = 'users'
+const collectionName = 'users';
 
 export default class UserDataAccess{
     async getUsers(){
         const result = await Mongo.db
-        .collectionName(collectionName)
+        .collection(collectionName)
         .find({})
         .toArray()
 
         return result;
     }
 
-    async deleteUser(){
+    async deleteUser(userId){
+        const result = await Mongo.db
+        .collection(collectionName)
+        .findOneAndDelete({_id: new ObjectId(userId)})
 
+        return result;
     }
 
     async updateUser(){

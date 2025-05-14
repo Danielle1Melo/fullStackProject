@@ -5,4 +5,16 @@ const usersRouter = express.Router();
 
 const usersControllers = new UsersControllers();
 
-export default userRouter
+usersRouter.get('/', async (req, res) => {
+    const { success, statusCode, body } = await usersControllers.getUsers();
+
+    res.status(statusCode).send({success, statusCode, body})
+})
+
+usersRouter.delete('/:id', async (req, res) => {
+    const { success , statusCode, body } = await usersControllers.deleteUser()
+
+    res.status(statusCode).send({success, statusCode, body})
+})
+
+export default usersRouter
