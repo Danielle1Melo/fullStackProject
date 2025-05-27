@@ -17,7 +17,7 @@ passport.use(new LocalStrategy({usernameField: 'email'}, async (email, password,
         return callback(null, false);
     }
 
-    const saltBuffer = user.salt.buffer;
+    const saltBuffer = user.salt;
 
     //números de default, utilizado para fazer a criptografia da password
     crypto.pbkdf2(password, saltBuffer, 310000, 16, 'sha256', (err, hashedPassword) => {
@@ -116,8 +116,7 @@ authRouter.post('/login', (req, res) => {
                 success: false,
                 statusCode: 400,
                 body: {
-                    text: 'User not found',
-                    error
+                    text: 'Credentials are not corret'
                 }
             })
         }

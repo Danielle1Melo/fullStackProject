@@ -12,7 +12,13 @@ usersRouter.get('/', async (req, res) => {
 })
 
 usersRouter.delete('/:id', async (req, res) => {
-    const { success , statusCode, body } = await usersControllers.deleteUser()
+    const { success , statusCode, body } = await usersControllers.deleteUser(req.params.id)
+
+    res.status(statusCode).send({success, statusCode, body})
+})
+
+usersRouter.put('/:id', async (req, res) => {
+    const { success , statusCode, body } = await usersControllers.updateUser(req.params.id, req.body)
 
     res.status(statusCode).send({success, statusCode, body})
 })

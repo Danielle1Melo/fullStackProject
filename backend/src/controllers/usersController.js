@@ -25,4 +25,14 @@ export default class UsersControllers {
             return serverError(error)
         }
     }
+
+    async updateUser(userID, userData){
+        try{
+            const result = await this.dataAccess.updateUser(userID, userData)
+
+            return ok(result)
+        }catch(error){
+            return serverError(error)
+        }
+    }
 }
