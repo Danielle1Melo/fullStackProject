@@ -5,6 +5,7 @@ import { config } from 'dotenv'
 import authRouter from "./auth/auth.js"
 import usersRouter from "./routes/usersRoutes.js"
 import platesRouter from "./routes/platesRoutes.js"
+import ordersRouter from "./routes/ordersRoutes.js"
 
 config()
 
@@ -31,6 +32,7 @@ async function main() {
     app.use('/auth', authRouter)
     app.use('/users', usersRouter)
     app.use('/plates', platesRouter)
+    app.use('/orders', ordersRouter)
     
     app.listen(port, () => {
         console.log(`Server running on : http://${hostname}:${port}`)
